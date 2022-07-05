@@ -1,7 +1,21 @@
-import React from 'react'
-import { AppContent, AppSidebar, AppFooter, AppHeader } from '../components/index'
+import React from "react";
+import {
+  AppContent,
+  AppSidebar,
+  AppFooter,
+  AppHeader,
+} from "../components/index";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 
 const DefaultLayout = () => {
+  const token = useSelector((state) => state.auth.token);
+
+  if (!token) {
+    console.log("TOKEN+++", token);
+    return <Navigate to="/login" replace />;
+  }
+
   return (
     <div>
       <AppSidebar />
@@ -13,7 +27,7 @@ const DefaultLayout = () => {
         <AppFooter />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default DefaultLayout
+export default DefaultLayout;
